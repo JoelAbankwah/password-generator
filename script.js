@@ -41,7 +41,12 @@ function writePassword() {
         }
         function confirmTypes() {
             password.mixedCase = window.confirm("Would you like to include upper and lowercase characters?")
-
+            if (mixedCase === false) {
+               var lowerCase = window.confirm("Would you like to include lowercase characters?")
+               if (lowerCase === false) {
+                   var UpperCase = window.confirm("Would you like to include uppercase characters?")
+               } 
+            }
             password.numChar = window.confirm("Would you like to include numeric characters?")
 
             password.specChar = window.confirm("Would you like to include special characters?")
