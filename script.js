@@ -49,7 +49,7 @@ function writePassword() {
             if (password.mixedCase === false && password.numChar === false && password.specChar === false) {
                 window.alert("You need to select at least 1 character type.")
                 confirmTypes();
-                    }
+            }
         }
     }                
 
