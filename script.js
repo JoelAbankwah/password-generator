@@ -17,22 +17,29 @@ THEN the password is either displayed in an alert or written to the page
 */
 
 // Get references to the #generate element
+
+var lower = ['abcdefghijklmnopqrstuvwxyz' ]
+var upper = ['ABCDEFGHIJKLMNOPQRSTUVWXYZ' ]
+var numeric = "1234567890"
+var specialCharacter = "!@#$%^&*()-+/"
+var potentialCharacters = ""
+var passwordText = ""
 var generateBtn = document.querySelector("#generate");
 
 // Write password to the #password input
 function writePassword() {
+
     var password = {
         legnth: 0,
-        mixedCase: false,
-        numChar: false,
-        specChar: false
+        mixed: false,
+        num: false,
+        special: false
     }
-    var password = generatePassword()
-    function generatePassword() {
+    var generatePassword = function() {
        password.legnth = window.prompt("Please choose a length for your password of at least 8 characters and no more than 128 characters.")
        var legnth = parseInt(password.legnth)
 
-       if (legnth > 8 && legnth < 128) {
+       if (legnth >= 8 && legnth <= 128) {
             confirmTypes();
        }
        else {
@@ -40,28 +47,46 @@ function writePassword() {
             generatePassword();
         }
         function confirmTypes() {
-            password.mixedCase = window.confirm("Would you like to include upper and lowercase characters?")
-            if (mixedCase === false) {
+            password.mixed = window.confirm("Would you like to include upper and lowercase characters?")
+            if (password.mixed === false) {
                var lowerCase = window.confirm("Would you like to include lowercase characters?")
                if (lowerCase === false) {
-                   var UpperCase = window.confirm("Would you like to include uppercase characters?")
+                   var upperCase = window.confirm("Would you like to include uppercase characters?")
                } 
             }
-            password.numChar = window.confirm("Would you like to include numeric characters?")
+            password.num = window.confirm("Would you like to include numeric characters?")
 
-            password.specChar = window.confirm("Would you like to include special characters?")
+            password.special = window.confirm("Would you like to include special characters?")
 
-            if (password.mixedCase === false && password.numChar === false && password.specChar === false) {
+            if (password.mixed === false && password.num === false && password.special === false && lowerCase === false && upperCase === false) {
                 window.alert("You need to select at least 1 character type.")
                 confirmTypes();
+            } 
+            if (password.mixed) {
+                potentialCharacters = potentialCharacters.concat(upper, lower)
+            }
+            if (lowerCase) {
+                potentialCharacters = potentialCharacters.concat(lower)    
+            }
+            if (upperCase) {
+                potentialCharacters = potentialCharacters.concat(upper)
+            }
+            if (password.num) {
+                potentialCharacters = potentialCharacters.concat(numeric)
+            }
+            if (password.special) {
+                potentialCharacters = potentialCharacters.concat(specialCharacter)
             }
         }
-    }                
 
+        for (var i = 0; i <= legnth; i++) {
+            var randomNumber = Math.floor(Math.random() * potentialCharacters.length);
+            passwordText += potentialCharacters.substring(randomNumber, randomNumber +1);
+        }
+        document.querySelector("#password").value = passwordText;
+    }
+    generatePassword(); 
 
-  var passwordText = document.querySelector("#password");
-
-  passwordText.value = password;
 };
 
 
