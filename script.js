@@ -1,8 +1,8 @@
 // Get references to the #generate element
 var generateBtn = document.querySelector("#generate");
 
-var lowerCharacter = ['abcdefghijklmnopqrstuvwxyz' ]
-var upperCharacters = ['ABCDEFGHIJKLMNOPQRSTUVWXYZ' ]
+var lowerCharacter = ['abcdefghijklmnopqrstuvwxyz']
+var upperCharacters = ['ABCDEFGHIJKLMNOPQRSTUVWXYZ']
 var numericCharacters = "1234567890"
 var specialCharacters = "!@#$%^&*()-+/"
 var potentialCharacters = ""
@@ -11,7 +11,7 @@ var passwordText = ""
 
 // Write password to the #password input
 function writePassword() {
-
+    var passwordText = ""
     var password = {
         legnth: 0,
         mixed: false,
@@ -64,8 +64,8 @@ function writePassword() {
             }
         }
 
-        //With each loop password text is equal to password text plus a random character between the two indices (randonum & randnoum +1)
-        for (var i = 0; i <= legnth; i++) {
+        //With each loop password text is equal to password text plus a random character between the two indices (randomnum & randomnum +1)
+        for (var i = 0; i < legnth; i++) {
             var randomNumber = Math.floor(Math.random() * potentialCharacters.length);
             passwordText += potentialCharacters.substring(randomNumber, randomNumber +1);
         }
